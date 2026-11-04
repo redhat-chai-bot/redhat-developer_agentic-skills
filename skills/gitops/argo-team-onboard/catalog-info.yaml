@@ -5,7 +5,14 @@ metadata:
   namespace: ai5-marketplace
   title: Argo Team Onboard
   description: >
-    Onboard app teams onto Argo CD the GitOps way — generates tenant config (AppProject, Application, RBAC, Namespace, quotas, NetworkPolicies) and commits it to the GitOps repo.
+    Onboard app teams onto Argo CD the GitOps way — generates tenant onboarding config
+    (AppProject, Application, RBAC, Namespace, quotas, NetworkPolicies) and commits it to
+    the GitOps repo for Argo CD to reconcile, rather than applying it to the cluster
+    imperatively. Discovery-first: adapts to the team's existing stack (Helm, Kustomize, or
+    plain YAML). Recommended path is a per-tenant values file rendered by an onboarding Helm
+    chart and discovered by an ApplicationSet. Does NOT generate CI pipelines, registry
+    config, or secrets backends. Use when users ask about onboarding teams, adding tenants,
+    setting up new teams, bootstrapping first apps, or self-service onboarding.
   labels:
     distribution: external
   annotations:
@@ -30,3 +37,4 @@ spec:
   agents: []
   dependsOn:
     - airesource:ai5-marketplace/openshift-gitops
+  dependencyOf: []
